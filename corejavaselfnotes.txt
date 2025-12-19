@@ -1,0 +1,61 @@
+“Synchronization in Java means controlling access to shared resources so that only one thread can use them at a time. This prevents race conditions and ensures data consistency. For example, StringBuffer is synchronized, making it thread-safe for multi-threaded applications. StringBuilder is not synchronized, so it’s faster but should only be used in single-threaded contexts.”
+
+“StringBuffer is synchronized, so it’s safe to use in multi-threaded environments, but that makes it slower. StringBuilder is faster because it’s not synchronized, so it’s ideal for single-threaded applications. If I’m writing a web server handling multiple requests, I’d prefer StringBuffer. But if I’m just building a string locally in one thread, StringBuilder is the better choice.”
+
+“In single‑threaded scenarios like building a SQL query, I’d use StringBuilder because it’s faster. In multi‑threaded scenarios like a logging system, I’d use StringBuffer because it’s synchronized and thread‑safe. Synchronization itself means only one thread can access a resource at a time — for example, in a bank account system, synchronization ensures two ATMs don’t withdraw money simultaneously and cause overdrafts.”
+
+
+“Synchronization doesn’t stop multiple users from logging in at the same time. Each login request runs in its own thread, so they can all happen concurrently. Synchronization only matters when those threads share a common resource — for example, writing to the same log file. In that case, synchronization ensures the log entries don’t overlap, but the login process itself still happens in parallel for multiple users.”
+
+
+An array is a general-purpose data structure that can hold multiple elements of the same type, like integers or characters, and it’s mutable. A string, on the other hand, is a specialized object in Java that represents text. Strings are immutable, meaning once created they cannot be changed, and they come with many built-in methods for text manipulation. Arrays are useful for raw data storage, while strings are optimized for handling text.”
+
+
+what is difference between abstraction and interface
+Quick Answer: An abstract class provides partial abstraction (can have both abstract and concrete methods), while an interface provides full abstraction (all methods are abstract by default, though Java 8+ allows default and static methods). Abstract classes are used when classes share common behavior, while interfaces are used to define contracts that multiple classes can implement.
+
+🔑 Key Differences Between Abstraction (Abstract Class) and Interface in Java
+Feature	Abstract Class	Interface
+Definition	A class that cannot be instantiated and may contain both abstract (unimplemented) and concrete (implemented) methods.	A collection of abstract methods (contract) that a class must implement.
+Method Implementation	Can have both abstract and non-abstract methods.	Methods are abstract by default; since Java 8, can have default and static methods.
+Variables	Can have instance variables (non-final, non-static).	Only public static final constants are allowed.
+Inheritance	Supports single inheritance (a class can extend only one abstract class).	Supports multiple inheritance (a class can implement multiple interfaces).
+Use Case	Used when classes share common state or behavior.	Used to define a contract that multiple unrelated classes can implement.
+Access Modifiers	Abstract methods can have any access modifier (public, protected).	All methods are implicitly public abstract.
+Performance	Slightly faster because it’s closer to normal class structure.	May be slower due to extra indirection, but negligible in modern JVMs.
+Sources:
+
+🧩 Example of Abstract Class
+java
+abstract class Animal {
+    abstract void sound(); // abstract method
+
+    void sleep() { // concrete method
+        System.out.println("Sleeping...");
+    }
+}
+
+class Dog extends Animal {
+    void sound() {
+        System.out.println("Bark");
+    }
+}
+👉 Here, Animal provides a template with both abstract (sound()) and concrete (sleep()) methods.
+
+🧩 Example of Interface
+java
+interface Vehicle {
+    void drive(); // abstract method
+}
+
+class Car implements Vehicle {
+    public void drive() {
+        System.out.println("Car is driving");
+    }
+}
+👉 Here, Vehicle defines a contract. Any class implementing it must provide its own drive() method.
+
+🎤 Interview-Ready Explanation
+You can say:
+
+“An abstract class is used when you want to provide a base class with some common functionality and some abstract methods that subclasses must implement. An interface, on the other hand, is used to define a contract that multiple classes can implement, regardless of their position in the class hierarchy. Abstract classes allow partial abstraction, while interfaces provide full abstraction. For example, I’d use an abstract class for an Animal hierarchy where all animals share some behavior, and an interface for something like Serializable or Comparable, which can apply to many unrelated classes.”
